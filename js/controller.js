@@ -14,49 +14,72 @@ var controllers = {};
  * */
 controllers.ahController = function ($scope, $http, auctionDataFactory,userDataFactory) {
     init();
+    var otherUserCounter = 1; //TODO, remove later only for scenario 4, for demonstration
+    /* init
+     * inits the auction with auction and current user data from server
+     */
     function init(){
         //get data belonging to the auction itself
         $scope.auction = auctionDataFactory.getAuctionData();
+
         //get user data for current logged in user
         $scope.auction.currentUser = userDataFactory.getUserData();
+
+        //TODO: multiple dummy users, only for testing, debugging
         $scope.auction.users = userDataFactory.getUsersData();
-        if($scope.auction.highestBid.length === 0)
-            $scope.auction.highestBid.push($scope.auction.auctionItem.startingPrice);
+
+        // initialize nextBid with startingPrice if no highestBid
+        if($scope.auction.highestBid === null)
+            $scope.auction.nextBid =  $scope.auction.auctionItem.startingPrice;
+        else
+            $scope.auction.nextBid =  $scope.getNextBid();
     }
 
-    /** Commit a bid
-     * TODO: send bid with timestamp and user data to server, server must store bids according to timestamp
+    /** commitBid
+     *  TODO: post bid and user data to server, server
+     *  must store bids and send response if bid was successful
+     * @param bidValue
+     * @param userID
+     * returns {{highestBidder: true/false}}  if bid was placed first, I am the highest bidder
      */
+
     $scope.commitBid= function() {
-        $scope.auction.iAmHighestBidder = true;
-        $scope.auction.currentBidder.push($scope.auction.currentUser);
-        $scope.auction.highestBid.push($scope.auction.highestBid[$scope.auction.highestBid.length-1] );
+        $http.post('data/postBid',
+            {
+                bidValue: $scope.auction.nextBid,
+                userId: $scope.auction.currentUser
+            })
+            .success(function(data, status, headers, config) {
+                $scope.auction.iAmHighestBidder = true;
+                $scope.auction.currentBidder = $scope.auction.currentUser;
+                $scope.auction.highestBid= $scope.auction.nextBid;
+                $scope.getNextBid();
+            }).
+            error(function(data, status, headers, config) {
+                // TODO: Error handling on frontend and backend
+                // TODO: Also handling of bid was NOT placed first... -> just update current bid
+            });
+
     };
 
     /** getNextBid
-     *  increases the highest bid by 10k (TODO: 10k should by an auction parameter!)
+     *  increases the current / highest bid by 10k
      */
     $scope.getNextBid = function()
     {
-        if($scope.auction.highestBid.length === 1)
-        {
-            console.log("start")
-            $scope.auction.highestBid.push($scope.auction.auctionItem.startingPrice);
-        }
-        else {
-            $scope.auction.highestBid.push($scope.auction.highestBid[$scope.auction.highestBid.length - 1] + 10000);
-            console.log("higher")
-        }
+        if($scope.auction.highestBid === null)
+            $scope.auction.nextBid = $scope.auction.auctionItem.startingPrice;
+        else
+            $scope.auction.nextBid = $scope.auction.highestBid + 10000; //TODO: 10k should by an auction parameter
     };
 
     /** endAuction
-     *  ends auction by setting auction.hasEnded, UI elements with ng-hide will be hidden
+     *  ends auction by setting auction.hasEnded, currently on disables UI elements with ng-hide
+     *  TODO: not yet implemented
      */
     $scope.endAuction = function ()
     {
         $scope.auction.hasEnded = true;
-        console.log($scope.auction.currentBidder);
-
     };
 
     /** checkout
@@ -77,25 +100,40 @@ controllers.ahController = function ($scope, $http, auctionDataFactory,userDataF
         $scope.showError = true;
     };
 
+    /** commitBidNotPlacedFirst
+     *  this is kind of a fake function to simulate a
+     *  bid that was not placed first resulting in not
+     *  becoming the highest bidder
+     */
+    $scope.commitBidNotPlacedFirst= function() {
+        if($scope.auction.hasEnded === true)return;
+
+        $http.post('data/postBidNotPlacedFirst',
+            {
+                bidValue: $scope.auction.nextBid,
+                userId: $scope.auction.currentUser
+            })
+            .success(function(data, status, headers, config) {
+                //just fake my bid was not placed first and another bidder is now current highest bidder
+                $scope.auction.iAmHighestBidder = false;
+                $scope.auction.currentBidder = $scope.auction.users[otherUserCounter];
+                $scope.auction.highestBid= $scope.auction.nextBid;
+                $scope.getNextBid();
+                if(otherUserCounter<4)otherUserCounter++;if(otherUserCounter>3)otherUserCounter=1;
+            }).
+            error(function(data, status, headers, config) {
+                // TODO: Error handling on frontend and backend
+            });
+    };
+
     /** changeUser
-     *  Only for testing, debugging purpose
+     *  Only for testing, debugging purpose, changing to fake multiple users
      * @param userNumber
      */
     $scope.changeUser= function(userNumber)
     {
         userDataFactory.changeUserData(userNumber);
         $scope.auction.currentUser = userDataFactory.getUserData();
-    };
-    /** otherUserCommitBid
-     *  Only for testing, debugging purpose
-     * @param userNumber
-     */
-    $scope.otherUserCommitBid= function(userNumber)
-    {
-        $scope.auction.iAmHighestBidder = false;
-        $scope.auction.currentBidder.push($scope.auction.users[userNumber]);
-        $scope.getNextBid();
-
     };
 
     /* add callbackTimer for auction countdown */

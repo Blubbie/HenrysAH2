@@ -22,7 +22,7 @@ factories.auctionDataFactory= function ($http) {
         name:"My only one auction title",
         number: 123,
         startTime:'7:20 PM',
-        time: 10, //countdown time for auction
+        time: 20, //countdown time for auction
         auctionItem: {
             title:'Ancient Gold Watch',
             description: 'Watch with lots of diamonds. And here comes some more text and information.',
@@ -35,8 +35,9 @@ factories.auctionDataFactory= function ($http) {
                 videoUrl: 'media/videos/2012-07-18_Market_Street_-_San_Francisco.webm.480p.webm'//dummy video from Wikimedia Commons
             }
         },
-        highestBid: [],
-        currentBidder: [],
+        nextBid: null,
+        highestBid: null,
+        currentBidder: null,
         iAmHighestBidder: false,
         currentUser: null
     };
@@ -69,15 +70,14 @@ factories.auctionDataFactory= function ($http) {
  */
 factories.userDataFactory= function ($http) {
     var user = {};
-    var users = {}; //TODO: this is only for testing, developing
+    var users = []; //TODO: this is only for testing, developing
     var factory = {};
     /* TODO: backend implementation
      currently all data is stored local in frontend
      later on current user data must be read from server
      */
     /* the following data should be read and updated from server */
-    /* For this prototype iam using an array of 3 users, they can be accessed by changeUser btn in debugging controlls */
-    var users = [];
+    /* For this prototype iam using an array of 3 users, they can be accessed by changeUser btn in debugging controls */
     users = [
         {
             lastName: "Münster",
@@ -102,6 +102,14 @@ factories.userDataFactory= function ($http) {
             countryFlag: "media/images/flags/it.png",
             id:"8901",
             currentAuctionId: null
+        },
+        {
+            "lastName": "McDonald",
+            "firstName": "Chris",
+            "country": "Great Britain",
+            "countryFlag": "media/images/flags/gb.png",
+            "id":"2344",
+            "currentAuctionId": null
         }
 
     ];
@@ -126,8 +134,9 @@ factories.userDataFactory= function ($http) {
         return user;
     };
     /** getUsersData
+     *  Only for testing, debugging purpose
      *  returns all users from factory
-     * @returns {{users}}
+     * @returns {Array}
      */
     factory.getUsersData = function() {
         return users;

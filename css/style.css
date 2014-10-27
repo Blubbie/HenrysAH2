@@ -13,7 +13,6 @@
 {
     width:40%;
     float:left;
-
 }
 
 .currentBidderData
@@ -30,4 +29,11 @@
 .auctionTimerRunning
 {
 
+}
+
+
+.codingScenarioHighlight {
+    background-color:lime;
+    font-weight:bold;
+    height:20px;
 }

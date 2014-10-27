@@ -10,10 +10,11 @@
     <br/><br/>
     <div>
         <div class="col-md-7">
+            <span class="glyphicon glyphicon-exclamation-sign codingScenarioHighlight" style="position:absolute;top:-20px;">Scenario 1 & 3</span>
             <!-- auction.currentBid should be formatted from integer to string with dot and comma 1000 => 1.000,00 -->
             <!-- bidding buttons or information button that i am the highest bidder -->
-            <button ng-hide="auction.iAmHighestBidder || auction.hasEnded === true" class="btn btn-lg btn-danger btn-block" data-ng-click="commitBid()">Commit to bid € {{auction.highestBid[auction.highestBid.length-1]}}</button>
-            <button ng-show="auction.iAmHighestBidder && !auction.hasEnded" class="btn btn-lg btn-success btn-block" data-ng-click="">Bid accepted. € {{auction.highestBid[auction.highestBid.length-1]}}</button>
+            <button ng-hide="auction.iAmHighestBidder || auction.hasEnded === true" class="btn btn-lg btn-danger btn-block" data-ng-click="commitBid()">Commit to bid € {{auction.nextBid}}</button>
+            <button ng-show="auction.iAmHighestBidder && !auction.hasEnded" class="btn btn-lg btn-success btn-block" data-ng-click="">Bid accepted. € {{auction.highestBid}}</button>
         </div>
         <div class="col-md-4 text-center" style="background-color:#cccccc;">
             Call the auction room<br/>live on<br/> +49 30 208 981 320

@@ -22,6 +22,15 @@
     "countryFlag": "media/images/flags/it.png",
     "id":"8901",
     "currentAuctionId": null
+  },
+  {
+    "lastName": "McDonald",
+    "firstName": "Chris",
+    "country": "Great Britain",
+    "countryFlag": "media/images/flags/gb.png",
+    "id":"2344",
+    "currentAuctionId": null
   }
+
 
 ]

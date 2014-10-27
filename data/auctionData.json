@@ -1,9 +1,9 @@
 {
   "hasEnded": false,
-  "name":"111My only one auction title",
-  "number": 123,
+  "name":"My only one auction title",
+  "number": 422,
   "startTime":"7:20 PM",
-  "time": 10,
+  "time": 20,
   "auctionItem": {
   "title":"Ancient Gold Watch",
   "description": "Watch with lots of diamonds. And here comes some more text and information.",
