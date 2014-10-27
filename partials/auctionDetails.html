@@ -1,0 +1,36 @@
+<div data-ng-controller="ahController" class="col-md-3" style="background-color:#cccccc">
+    <div id="itemDetails">
+        <br/>
+        {{auction.auctionItem.description}}
+        <br/><br/>
+        <div ng-show="auction.hasEnded && auction.currentBidder.length !==0">
+            <div class="alert alert-danger text-center">
+                <b>Sold for<br>€ {{auction.highestBid[auction.highestBid.length-1]}}</b>
+            </div>
+        </div>
+        <div ng-show="auction.hasEnded && auction.currentBidder.length === 0">
+            <div class="alert alert-warning text-center">
+                <b>Auction was not sold<br></b>
+            </div>
+        </div>
+        <div ng-show="!auction.hasEnded">
+            Starting price € {{auction.auctionItem.startingPrice}}
+            <br/>
+            Estimate € {{auction.auctionItem.estimatePrice}}
+        </div>
+        <br/><br/>
+        <img src="{{auction.auctionItem.mediaData.imageUrl}}" title="{{auction.auctionItem.title}}" />
+        <br/><br/>
+        <div  class="currentBidderPlaceholder" >
+            <div ng-show="auction.currentBidder[0]">
+                <div class="currentBidderFlag">
+                    <img src="{{auction.currentUser.countryFlag}}" class="countryFlag" title="{{henrysAuctionHouseApp.currentUser.country}}" />
+                </div>
+                <div class="currentBidderData">
+                    <b>{{auction.currentUser.firstName}}, Bidder {{auction.currentUser.id}} from {{auction.currentUser.country}}</b><br/>
+                    bid €{{auction.highestBid[auction.highestBid.length-1]}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

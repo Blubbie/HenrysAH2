@@ -1,0 +1,21 @@
+{
+  "hasEnded": false,
+  "name":"111My only one auction title",
+  "number": 123,
+  "startTime":"7:20 PM",
+  "time": 10,
+  "auctionItem": {
+  "title":"Ancient Gold Watch",
+  "description": "Watch with lots of diamonds. And here comes some more text and information.",
+  "startingPrice": 180000,
+  "estimatePrice": 360000,
+  "mediaData": {
+        "imageUrl": "media/images/watch.jpg",
+        "videoUrl": "media/videos/2012-07-18_Market_Street_-_San_Francisco.webm.480p.webm"
+    }
+  },
+"highestBid": null,
+"currentBidder": null,
+"iAmHighestBidder": false,
+"currentUser": null
+}

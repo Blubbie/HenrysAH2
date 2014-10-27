@@ -1,0 +1,27 @@
+[
+  {
+    "lastName": "Münster",
+    "firstName": "Henry",
+    "country": "Germany",
+    "countryFlag": "media/images/flags/de.png",
+    "id":"1234",
+    "currentAuctionId": null
+  },
+  {
+    "lastName": "Doe",
+    "firstName": "Jon",
+    "country": "United States",
+    "countryFlag": "media/images/flags/usa.png",
+    "id":"4567",
+    "currentAuctionId": null
+  },
+  {
+    "lastName": "Panini",
+    "firstName": "Marcello",
+    "country": "Italy",
+    "countryFlag": "media/images/flags/it.png",
+    "id":"8901",
+    "currentAuctionId": null
+  }
+
+]

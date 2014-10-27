@@ -1,0 +1,19 @@
+<div data-ng-controller="ahController" class="row">
+    <!-- User state, login, logout etc. -->
+    <div class="col-md-5">
+        <button type="button" class="btn btn-default btn-lg" ng-click="expandUserOptions()">
+            <span class="glyphicon glyphicon-user"></span> Hello, {{auction.currentUser.firstName}} {{auction.currentUser.lastName}}
+            <span ng-show="showError" class="alert alert-danger" role="alert">Feature not available!</span>
+        </button>
+    </div>
+    <!-- auction timer countdown -->
+     <div class="col-md-5 {{callbackTimer.status}}" ng-hide="auction.hasEnded">
+         <h3>Auction ends in: <b><timer countdown="auction.time" finish-callback="callbackTimer.finished()" interval="1000">{{countdown}}</timer> seconds</b></h3>
+     </div>
+</div>
+<div data-ng-controller="ahController" class="row">
+    <!-- auction information, name, number, starting time... -->
+    <div class="col-md-10">
+        <h1>{{auction.name}}, Auction Nr. {{auction.number}}&nbsp;|&nbsp;{{auction.startTime}}</h1>
+    </div>
+</div>

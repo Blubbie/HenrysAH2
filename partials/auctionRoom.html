@@ -1,0 +1,22 @@
+<div class="col-md-6" >
+    <h2>{{auction.auctionItem.title}}</h2>
+    <!-- include video stream later on, currently only a dummy video -->
+    <div id="itemVideoStream" >
+        <video height="300" autoplay>
+            <source src="{{auction.auctionItem.mediaData.videoUrl}}" type="video/webm">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <br/><br/>
+    <div>
+        <div class="col-md-7">
+            <!-- auction.currentBid should be formatted from integer to string with dot and comma 1000 => 1.000,00 -->
+            <!-- bidding buttons or information button that i am the highest bidder -->
+            <button ng-hide="auction.iAmHighestBidder || auction.hasEnded === true" class="btn btn-lg btn-danger btn-block" data-ng-click="commitBid()">Commit to bid € {{auction.highestBid[auction.highestBid.length-1]}}</button>
+            <button ng-show="auction.iAmHighestBidder && !auction.hasEnded" class="btn btn-lg btn-success btn-block" data-ng-click="">Bid accepted. € {{auction.highestBid[auction.highestBid.length-1]}}</button>
+        </div>
+        <div class="col-md-4 text-center" style="background-color:#cccccc;">
+            Call the auction room<br/>live on<br/> +49 30 208 981 320
+        </div>
+    </div>
+</div>

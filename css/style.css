@@ -1,0 +1,33 @@
+.countryFlag
+{
+    width:100px;
+
+}
+
+.currentBidderPlaceholder
+{
+    height:150px;
+}
+
+.currentBidderFlag
+{
+    width:40%;
+    float:left;
+
+}
+
+.currentBidderData
+{
+    width:60%;
+    float:right;
+}
+
+.auctionTimerEnded
+{
+    visibility:hidden;
+}
+
+.auctionTimerRunning
+{
+
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html data-ng-app="henrysAuctionHouseApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Henrys Auction House</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+<!-- Debugging controlls, TODO: remove on release -->
+<div data-ng-include="'partials/debugging_testing.html'"></div>
+
+<div class="container">
+    <!-- simple include to use html partials as templates -->
+    <div data-ng-include="'partials/header.html'"></div>
+    <div class="row">
+            <!-- usage of ng-view to route later on if necessary-->
+           <div data-ng-view=""></div>
+            <!-- auction details, image, current bidder -->
+            <div data-ng-include="'partials/auctionDetails.html'"></div>
+       </div>
+   </div>
+    <!-- standard libs -->
+    <script src="libs/angular.js"></script>
+    <script src="libs/angular-route.js"></script>
+
+    <!-- © Siddique Hameed 2013 http://siddii.github.io/angular-timer/ -->
+    <script src="libs/timer.js"></script>
+
+    <!-- My AngularJS stuff -->
+    <script src="js/module.js"></script>
+    <script src="js/factory.js"></script>
+    <script src="js/controller.js"></script>
+</body>
+</html>

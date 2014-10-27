@@ -1,0 +1,13 @@
+<div ng-hide="disableDebuggingControlls" id="debuggingControlls" ng-controller="ahController" style="background-color:#cccccc;border:1px solid blue"><b>Debugging Btns:</b><br>
+    <button data-ng-click="endAuction()">end auction</button>
+    <button data-ng-click="changeUser(0)">change to User 1 (Default)</button>
+    <button data-ng-click="changeUser(1)">change to User 2</button>
+    <button data-ng-click="changeUser(2)">change to User 3</button>
+    <button data-ng-click="otherUserCommitBid(2)">User 3 Commit a bid</button>
+    <br/>
+    <b>current auction data:</b><br>
+    I am highest bidder:<b>{{auction.iAmHighestBidder}}</b>,
+    current bid:<b>{{auction.highestBid}}</b>,
+    current bidder:{{auction.currentBidder.firstName}} {{auction.currentBidder.lastName}} id:{{auction.currentBidder.id}} from{{auction.currentBidder.country}}
+    <button style="position: absolute;top:5px;right:5px;" class="glyphicon glyphicon-remove" ng-click="disableDebuggingControlls= true"></button>
+</div>
